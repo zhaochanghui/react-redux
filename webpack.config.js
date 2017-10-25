@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 const path = require('path');
 module.exports = {
 	entry: './app/index.js',
@@ -22,7 +23,8 @@ module.exports = {
 			exclude: /node_modules/,
 			loader: "babel-loader",
 			query: {
-				presets: ["es2015","react"]
+				presets: ["es2015","react"],
+				"plugins": ["transform-runtime"]
 			}
 		},
 		{
@@ -30,5 +32,10 @@ module.exports = {
 			loader: 'style-loader!css-loader'
 		}
 		]
-	}
+	},
+
+	plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+   	new  webpack.NoEmitOnErrorsPlugin()
+  ]
 };
