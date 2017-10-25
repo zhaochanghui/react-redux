@@ -18,3 +18,43 @@ class Counter extends Component{
 			);
 	}
 }
+
+
+const mapStateToProps = (state)=>{
+	return {
+		value: state.cnt
+	}
+}
+
+const mapDispatchToProps = (dispatch)=>{
+	return{
+		reducerHandler: ()=>{
+			dispatch({type:'REDUCE'});
+		},
+		addHandler: ()=>{
+			dispatch({type:'ADD'});
+		}
+	}
+}
+
+const APP = connect(mapStateToProps,mapDispatchToProps)(Counter);
+
+const reducer = (state={cnt:0},action)=>{
+	switch(action.type){
+		case 'ADD':
+			return {cnt: state.cnt+1};
+		case 'REDUCE':
+			return {cnt: state.cnt-1};
+		default:
+			return state;		
+	}
+}
+
+const store = createStore(reducer);
+
+ReactDOM.render(
+	<Provider store={store}>
+		<APP />
+	</Provider>,
+	document.getElementById('root')
+	);
