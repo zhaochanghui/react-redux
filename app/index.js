@@ -48,6 +48,7 @@ class App extends React.Component {
     }
 
     render() {
+    	alert(99)
         return (
             <div>
                 <h1>React Router Tutorial</h1>
